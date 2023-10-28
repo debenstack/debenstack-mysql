@@ -1,0 +1,25 @@
+version: '3.7'
+
+volumes:
+  mysqldb:
+
+services:
+  mysql:
+    build: .
+    restart: always
+    ports:
+        - 127.0.0.1:3306:3306
+    expose:
+        - '3306'
+    environment:
+      # aws settingss
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+
+      # mysql settings
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    volumes:
+      - mysqldb:/var/lib/mysql
